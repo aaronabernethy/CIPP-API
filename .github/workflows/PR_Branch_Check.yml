@@ -16,6 +16,10 @@ permissions:
 
 jobs:
   check-branch:
+    # Only enforce upstream PR rules on the upstream repository. On forks,
+    # this job would otherwise auto-close the fork owner's own PRs to master,
+    # because the head repo of any same-fork PR is itself a fork.
+    if: github.repository_owner == 'KelvinTegelaar'
     runs-on: ubuntu-slim
     steps:
       - name: Check and Comment on PR
